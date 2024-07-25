@@ -136,9 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error playing audio:', error);
             });
             playPauseBtn.textContent = 'Pause';
+            audioPlayer.loop = true;
         } else {
             audioPlayer.pause();
             playPauseBtn.textContent = 'Play';
+            audioPlayer.loop = false;
         }
     });
 
