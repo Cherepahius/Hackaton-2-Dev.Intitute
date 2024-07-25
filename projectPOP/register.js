@@ -16,13 +16,14 @@ async function registerUser(e) {
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
+            alert("email or user already in use")
         }
 
         const data = await response.json();
         console.log('Success:', data);
 
-        newuser = '';
-        newPassword = '';
+        document.getElementById("username").value = '';
+        document.getElementById("password").value = '';
     } catch (error) {
         console.error('Error registering', error);
     }
