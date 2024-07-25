@@ -49,7 +49,7 @@ const _getAllUsers = () => {
 
 
   const _createNewComment = async (inspiration) => {
-    return db("phrases").insert({inspiration})
+    return db("phrases").insert({inspiration},["id","inspiration"])
   }
 
   const _getOneComment = (user_id) => {
