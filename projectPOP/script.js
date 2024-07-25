@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageBox = document.getElementById('message-box');
     const bubbleSizeInput = document.getElementById('bubbleSize');
     const bubbleFrequencyInput = document.getElementById('bubbleFrequency');
+    const comment = document.getElementById("newphrase")
     const maxBubbles = 30;
     const bubbleLifetime = 100000;
     const headerHeight = 60;
@@ -158,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addNewComment(e)
     })
     setInterval(createBubble, 500);
-    
+
     bubbleSizeInput.addEventListener('input', (event) => {
         bubbleSize = parseInt(event.target.value, 10);
         console.log('Bubble Size Updated:', bubbleSize); // Debug line
