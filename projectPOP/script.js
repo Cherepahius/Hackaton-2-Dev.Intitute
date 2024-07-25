@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageBox = document.getElementById('message-box');
     const bubbleSizeInput = document.getElementById('bubbleSize');
     const bubbleFrequencyInput = document.getElementById('bubbleFrequency');
-    const comment = document.getElementById("newphrase")
+    const ideasText = document.getElementById("ideasText")
+    const submitIdeas = document.getElementById("submitIdeas");
     const maxBubbles = 30;
     const bubbleLifetime = 100000;
     const headerHeight = 60;
@@ -102,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     async function addNewComment(e) {
-        e.preventDefault();
-        let newComment = commentValue.value;
+        e.preventDefault()
+        let newComment = ideasText.value;
     
         try {
             const response = await fetch('http://localhost:3000/messages/create', {
@@ -121,13 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             console.log('Success:', data);
     
-            commentValue.value = '';
+            alert("New message added")
+            ideasText.value = '';
+            return ideasText.value
         } catch (error) {
             console.error('Error posting the comment:', error);
         }
+        alert("New message added")
     }
 
-    comment.addEventListener("submit", function (e) {
+    submitIdeas.addEventListener("click", function (e) {
         addNewComment(e)
     })
     setInterval(createBubble, 500);

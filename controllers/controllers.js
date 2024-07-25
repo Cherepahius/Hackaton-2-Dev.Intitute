@@ -100,7 +100,10 @@ const createUser = async (req, res) => {
     _createNewComment(inspiration)
       .then((result) => {
         console.log(result)
-        return result
+        res.status(201).json({ 
+          message: "New text added",
+          user: result});
+        
       })
       .catch((e) => {
         console.log(e)
