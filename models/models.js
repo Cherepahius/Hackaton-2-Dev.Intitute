@@ -8,10 +8,10 @@ const _getAllUsers = () => {
     return db("users").select("id", "username", "password").orderBy("id");
   }
   
-  const _getOneUser = (book_id) => {
+  const _getOneUser = (user_id) => {
     return db("users")
     .select("id", "username", "password",)
-    .where({ id: book_id });
+    .where({ id: user_id });
   }
   
   const _createUser = async (userinfo) => {
@@ -34,7 +34,7 @@ const _getAllUsers = () => {
 
   }
 
-  const _getUserByName = async (email, username) => {
+  const _getUserByName = async (username) => {
     try {
       
       const user = await db("users")
@@ -48,9 +48,22 @@ const _getAllUsers = () => {
   }
 
 
+  const _createNewComment = async (inspiration) => {
+    return db("phrases").insert({inspiration})
+  }
+
+  const _getOneComment = (user_id) => {
+    return db("phrases")
+    .select("id", "inspiration")
+    .where({ id: user_id });
+  }
+
+
   module.exports = {
     _getAllUsers,
     _getOneUser,
     _createUser,
     _getUserByName,
+    _createNewComment,
+    _getOneComment,
   };

@@ -4,6 +4,8 @@ const {
    _getOneUser,
    _createUser,
    _getUserByName,
+   _createNewComment,
+   _getOneComment,
 
 } = require("../models/models.js");
 
@@ -33,9 +35,9 @@ const getOneUser = (req, res) => {
 
 
 const createUser = async (req, res) => {
-  const { email, username, first_name, last_name, password } = req.body;
+  const {username, password } = req.body;
 
-  const user = { email, username, first_name, last_name, password } 
+  const user = { username, password } 
   try {
     const userInfo = await _createUser(user)
     res.status(201).json({ 
@@ -52,7 +54,7 @@ const createUser = async (req, res) => {
 
 
   const LoginUser = async (req, res) => {
-    const{email, username, password} = req.body
+    const{username, password} = req.body
 
     try {
       const user = await _getUserByName(username,)
@@ -78,9 +80,37 @@ const createUser = async (req, res) => {
     }
   }
 
+
+  const getOneComment = (req, res) => {
+    const { id } = req.params;
+    _getOneComment(id)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((e) => {
+        res.status(404).json({ message: "something went wrong!!!" });
+      });
+  };
+
+
+  const createNewComment = async (req, res) => {
+    const { inspiration } = req.body;
+  
+    const message = { inspiration } 
+    try {
+      const newMessage = await _createNewComment(message)
+      res.status(201).json({ 
+        message: "New message added",
+        added: newMessage});
+    } catch (error) {
+        res.status(500).json({ error: "internal server error" });
+      }
+    }
 module.exports = {
     getAllUsers,
     getOneUser,
     createUser,
     LoginUser,
+    getOneComment,
+    createNewComment,
 };
