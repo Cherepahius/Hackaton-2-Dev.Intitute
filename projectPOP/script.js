@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         "Unstoppable popper!",
         "Bubble wrap champion!"
     ];
-
     function createBubble() {
         if (bubbleWrap.children.length >= maxBubbles) return;
         const bubble = document.createElement('div');
@@ -36,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bubble.addEventListener('click', () => popBubble(bubble));
 
         bubbleWrap.appendChild(bubble);
+
 
         setTimeout(() => {
             if (bubble.parentElement) {
@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             poppedCount++;
             checkPoppedCount();
 
+
             setTimeout(() => {
                 if (bubble.parentElement) {
                     bubbleWrap.removeChild(bubble);
@@ -70,12 +71,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function checkPoppedCount() {
+
+
+    async function checkPoppedCount() {
         if (poppedCount % 10 === 0) {
-            const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-            displayMessage(randomPhrase);
+            try {
+                const response = await fetch('http://localhost:3000/messages');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const phrases = await response.json();
+                const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)].inspiration;
+                displayMessage(randomPhrase);
+            } catch (error) {
+                console.error('Error fetching phrases from the API:', error);
+            }
         }
     }
+
 
     function displayMessage(message) {
         messageBox.textContent = message;
@@ -85,6 +98,67 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
+
+
+    async function addNewComment(e) {
+        e.preventDefault();
+        let newComment = commentValue.value;
+    
+        try {
+            const response = await fetch('http://localhost:3000/messages/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ inspiration: newComment })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log('Success:', data);
+    
+            commentValue.value = '';
+        } catch (error) {
+            console.error('Error posting the comment:', error);
+        }
+    }
+
+    async function registerUser(e) {
+        e.preventDefault();
+        const newuser = ""
+        const newPassword = ""
+
+        try {
+            const response = await fetch('http://localhost:3000/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: newuser ,password: newPassword })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log('Success:', data);
+    
+            commentValue.value = '';
+        } catch (error) {
+            console.error('Error posting the comment:', error);
+        }
+    }
+
+
+    comment.addEventListener("submit", function (e) {
+        addNewComment(e)
+    })
+    setInterval(createBubble, 500);
+=======
     bubbleSizeInput.addEventListener('input', (event) => {
         bubbleSize = parseInt(event.target.value, 10);
         console.log('Bubble Size Updated:', bubbleSize); // Debug line
@@ -167,4 +241,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loadTrack(currentTrackIndex);
+
 });
