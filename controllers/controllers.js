@@ -45,7 +45,8 @@ const createUser = async (req, res) => {
       message: "user registerd success",
       user: userInfo});
   } catch (error) {
-    console.log(error.code) 
+    console.log(error.code)
+    console.log(error) 
       if (error.code == 23505){
         res.status(200).json({ error: "email or user already in use" });
       } 

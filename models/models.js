@@ -15,14 +15,15 @@ const _getAllUsers = () => {
   }
   
   const _createUser = async (userinfo) => {
+    const trx = await db.transaction();
     const { username, password} = userinfo
     const hashPassword =  await bcrypt.hash(password+"", saltRounds)
 
     try {
       console.log(userinfo)
       const [user] = await trx("users").insert(
-                  { username, hashPassword},
-                  ["username", "id"]
+                  { username: username, password: hashPassword},
+                  ["username", "password"]
       );
       await trx.commit()
 
