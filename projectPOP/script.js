@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageBox = document.getElementById('message-box');
     const bubbleSizeInput = document.getElementById('bubbleSize');
     const bubbleFrequencyInput = document.getElementById('bubbleFrequency');
+    // const register = document.getElementById("registerForm")
     const comment = document.getElementById("newphrase")
     const maxBubbles = 30;
     const bubbleLifetime = 100000;
@@ -128,9 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function registerUser(e) {
-        e.preventDefault();
-        const newuser = ""
-        const newPassword = ""
+        e.preventDefault()
+        const newuser = document.getElementById("username").value
+        const newPassword = document.getElementById("password").value
 
         try {
             const response = await fetch('http://localhost:3000/users/register', {
@@ -148,12 +149,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             console.log('Success:', data);
     
-            commentValue.value = '';
+            newuser = '';
+            newPassword = '';
         } catch (error) {
-            console.error('Error posting the comment:', error);
+            console.error('Error registering', error);
         }
     }
 
+
+// register.addEventListener("submit", function(e) {
+//     registerUser(e)
+// })
 
     comment.addEventListener("submit", function (e) {
         addNewComment(e)

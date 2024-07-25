@@ -19,6 +19,7 @@ const _getAllUsers = () => {
     const hashPassword =  await bcrypt.hash(password+"", saltRounds)
 
     try {
+      console.log(userinfo)
       const [user] = await trx("users").insert(
                   { username, hashPassword},
                   ["username", "id"]
