@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addNewComment(e)
     })
     setInterval(createBubble, 500);
-=======
+    
     bubbleSizeInput.addEventListener('input', (event) => {
         bubbleSize = parseInt(event.target.value, 10);
         console.log('Bubble Size Updated:', bubbleSize); // Debug line
