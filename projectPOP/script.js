@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const bubbleWrap = document.getElementById('bubble-wrap');
     const popSound = document.getElementById('pop-sound');
     const messageBox = document.getElementById('message-box');
+    const comment = document.getElementById("newComment");
+    const commentValue = document.getElementById("commentValue")
     const maxBubbles = 15;
     const bubbleLifetime = 100000;
     let poppedCount = 0;
@@ -96,5 +98,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
+    async function addNewComment(e) {
+        e.preventDefault();
+        let newComment = commentValue.value;
+    
+        try {
+            const response = await fetch('http://localhost:3000/messages/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ inspiration: newComment })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log('Success:', data);
+    
+            commentValue.value = '';
+        } catch (error) {
+            console.error('Error posting the comment:', error);
+        }
+    }
+
+    async function registerUser(e) {
+        e.preventDefault();
+        const newuser = ""
+        const newPassword = ""
+
+        try {
+            const response = await fetch('http://localhost:3000/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: newuser ,password: newPassword })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log('Success:', data);
+    
+            commentValue.value = '';
+        } catch (error) {
+            console.error('Error posting the comment:', error);
+        }
+    }
+
+
+    comment.addEventListener("submit", function (e) {
+        addNewComment(e)
+    })
     setInterval(createBubble, 500);
 });
