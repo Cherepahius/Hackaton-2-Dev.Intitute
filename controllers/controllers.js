@@ -66,7 +66,6 @@ const createUser = async (req, res) => {
       }
 
       const passwordMatch = await bcrypt.compare(password+"", user.password)
-      console.log(password)
       if (!passwordMatch) {
         return res.status(401).json({ message: "authentaction failed check password" });
       }

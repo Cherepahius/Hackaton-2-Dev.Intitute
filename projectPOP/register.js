@@ -3,7 +3,9 @@ const register = document.getElementById("registerForm")
 async function registerUser(e) {
     e.preventDefault()
     const newuser = document.getElementById("username").value
+    console.log(newuser)
     const newPassword = document.getElementById("password").value
+    console.log(newPassword)
 
     try {
         const response = await fetch('http://localhost:3000/users/register', {
