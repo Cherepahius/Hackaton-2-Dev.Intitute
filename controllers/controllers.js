@@ -59,13 +59,14 @@ const createUser = async (req, res) => {
     const{username, password} = req.body
 
     try {
-      const user = await _getUserByName(username,)
+      const user = await _getUserByName(username)
 
       if(!user) {
         return res.status(404).json({ message: "user not found" });
       }
 
       const passwordMatch = await bcrypt.compare(password+"", user.password)
+      console.log(password)
       if (!passwordMatch) {
         return res.status(401).json({ message: "authentaction failed check password" });
       }

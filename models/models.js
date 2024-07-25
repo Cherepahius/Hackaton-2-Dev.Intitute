@@ -45,6 +45,7 @@ const _getAllUsers = () => {
       .first()
       return user
     } catch (error) {
+      console.log(error)
       throw error
     }
   }

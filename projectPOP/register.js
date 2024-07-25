@@ -15,12 +15,18 @@ async function registerUser(e) {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
             alert("email or user already in use")
+            throw new Error('Network response was not ok');
+            
         }
 
         const data = await response.json();
-        console.log('Success:', data);
+        if ('error' in data) {
+            alert("that user already exists")
+        } else {
+            alert('Success: new user registered');
+        }
+
 
         document.getElementById("username").value = '';
         document.getElementById("password").value = '';
