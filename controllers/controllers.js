@@ -15,6 +15,7 @@ const getAllUsers = (req, res) => {
       res.json(result);
     })
     .catch((e) => {
+      console.log(e)
       res.status(404).json({ message: "something went wrong!!!" });
     });
 };

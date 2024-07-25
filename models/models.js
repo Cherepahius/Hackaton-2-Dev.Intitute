@@ -5,12 +5,12 @@ const saltRounds = 10;
 
 
 const _getAllUsers = () => {
-    return db("users").select("id", "user", "password").orderBy("id");
+    return db("users").select("id", "username", "password").orderBy("id");
   }
   
   const _getOneUser = (book_id) => {
-    return db("books")
-    .select("id", "user", "password",)
+    return db("users")
+    .select("id", "username", "password",)
     .where({ id: book_id });
   }
   
