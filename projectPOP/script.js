@@ -70,10 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    function checkPoppedCount() {
+    async function checkPoppedCount() {
         if (poppedCount % 10 === 0) {
-            const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-            displayMessage(randomPhrase);
+            try {
+                const response = await fetch('http://localhost:3000/messages');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const phrases = await response.json();
+                const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)].inspiration;
+                displayMessage(randomPhrase);
+            } catch (error) {
+                console.error('Error fetching phrases from the API:', error);
+            }
         }
     }
 

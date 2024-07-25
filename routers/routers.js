@@ -3,6 +3,7 @@ const {
     getOneUser,
     createUser,
     LoginUser,
+    getAllComments,
     getOneComment,
     createNewComment,
     } = require("../controllers/controllers.js");
@@ -12,10 +13,11 @@ const {
     const router = express.Router();
   
     
-    router.get("/", getAllUsers);
-    router.get("/:id", getOneUser);
-    router.post("/register", createUser);
-    router.post("/login", LoginUser);
+    router.get("/messages", getAllComments,);
+    router.get("/users", getAllUsers);
+    router.get("/users/:id", getOneUser);
+    router.post("/users/register", createUser);
+    router.post("/users/login", LoginUser);
     router.get("/messages/:id", getOneComment);
     router.post("/messages/create", createNewComment);
 

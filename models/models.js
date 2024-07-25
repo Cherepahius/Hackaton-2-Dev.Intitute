@@ -58,6 +58,10 @@ const _getAllUsers = () => {
     .where({ id: user_id });
   }
 
+  
+  const _getAllComments = () => {
+    return db("phrases").select("id", "inspiration").orderBy("id");
+  }
 
   module.exports = {
     _getAllUsers,
@@ -66,4 +70,5 @@ const _getAllUsers = () => {
     _getUserByName,
     _createNewComment,
     _getOneComment,
+    _getAllComments,
   };

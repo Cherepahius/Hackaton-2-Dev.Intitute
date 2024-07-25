@@ -6,6 +6,7 @@ const {
    _getUserByName,
    _createNewComment,
    _getOneComment,
+   _getAllComments,
 
 } = require("../models/models.js");
 
@@ -94,18 +95,28 @@ const createUser = async (req, res) => {
 
 
   const createNewComment = async (req, res) => {
-    const { inspiration } = req.body;
-  
-    const message = { inspiration } 
-    try {
-      const newMessage = await _createNewComment(message)
-      res.status(201).json({ 
-        message: "New message added",
-        added: newMessage});
-    } catch (error) {
-        res.status(500).json({ error: "internal server error" });
-      }
+    const {  inspiration } = req.body;
+    _createNewComment(inspiration)
+      .then((result) => {
+        console.log(result)
+        return result
+      })
+      .catch((e) => {
+        console.log(e)
+        res.status(404).json({ message: "something went wrong!!!" });
+      });
     }
+
+  const getAllComments = (req, res) => {
+    _getAllComments()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((e) => {
+      console.log(e)
+      res.status(404).json({ message: "something went wrong!!!" });
+    });
+};
 module.exports = {
     getAllUsers,
     getOneUser,
@@ -113,4 +124,5 @@ module.exports = {
     LoginUser,
     getOneComment,
     createNewComment,
+    getAllComments,
 };

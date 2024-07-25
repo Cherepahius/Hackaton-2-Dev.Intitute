@@ -11,6 +11,6 @@ app.use(cors());
 app.listen(process.env.PORT || 3000, () => {
   console.log(`run on ${process.env.PORT || 3000}`);
 });
-
+app.use("/", express.static(`${__dirname}/projectPOP`));
 
 app.use("/", router);
