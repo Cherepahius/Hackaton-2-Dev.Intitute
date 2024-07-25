@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('nextBtn');
     const volumeControl = document.getElementById('volumeControl');
 
-    // NEEED TO FIX THIS PATH IS OK, BUT THE FILES REFUSE TO OPEN UP!
+
     const tracks = [
         'music/track1.mp3',
         'music/track2.mp3',

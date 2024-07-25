@@ -35,7 +35,7 @@ body {
 
 .nav-btn {
     background-color: #333;
-
+    text-decoration: none;
     color: #fff;
     border: none;
     padding: 10px 20px;
