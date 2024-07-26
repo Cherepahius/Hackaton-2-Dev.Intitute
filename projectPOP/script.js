@@ -4,14 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageBox = document.getElementById('message-box');
     const bubbleSizeInput = document.getElementById('bubbleSize');
     const bubbleFrequencyInput = document.getElementById('bubbleFrequency');
+<<<<<<< Updated upstream
     const ideasText = document.getElementById("ideasText")
     const submitIdeas = document.getElementById("submitIdeas");
+=======
+    const ideasText = document.getElementById("ideasText");
+    const submitIdeas = document.getElementById("submitIdeas");
+    const colorGrid = document.getElementById('colorGrid');
+    const randomColorCheckbox = document.getElementById('randomColor');
+>>>>>>> Stashed changes
     const maxBubbles = 30;
     const bubbleLifetime = 100000;
     const headerHeight = 60;
     let poppedCount = 0;
     let bubbleSize = parseInt(bubbleSizeInput.value, 10);
     let bubbleFrequency = parseInt(bubbleFrequencyInput.value, 10);
+    let selectedColor = null;
 
     const phrases = [
         "You can do it!",
@@ -25,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Unstoppable popper!",
         "Bubble wrap champion!"
     ];
+
     function createBubble() {
         if (bubbleWrap.children.length >= maxBubbles) return;
         const bubble = document.createElement('div');
@@ -33,11 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
         bubble.style.height = `${bubbleSize}px`;
         bubble.style.top = `${headerHeight + Math.random() * (window.innerHeight - headerHeight - bubbleSize)}px`;
         bubble.style.left = `${Math.random() * (window.innerWidth - bubbleSize)}px`;
-        bubble.style.backgroundColor = getRandomColor();
+
+        if (randomColorCheckbox.checked || !selectedColor) {
+            bubble.style.backgroundColor = getRandomColor();
+        } else {
+            bubble.style.backgroundColor = selectedColor;
+        }
+
         bubble.addEventListener('click', () => popBubble(bubble));
-
         bubbleWrap.appendChild(bubble);
-
 
         setTimeout(() => {
             if (bubble.parentElement) {
@@ -64,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             poppedCount++;
             checkPoppedCount();
 
-
             setTimeout(() => {
                 if (bubble.parentElement) {
                     bubbleWrap.removeChild(bubble);
@@ -72,8 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100);
         }
     }
-
-
 
     async function checkPoppedCount() {
         if (poppedCount % 10 === 0) {
@@ -91,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     function displayMessage(message) {
         messageBox.textContent = message;
         messageBox.style.display = 'flex';
@@ -100,12 +109,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
-
-
     async function addNewComment(e) {
+<<<<<<< Updated upstream
         e.preventDefault()
         let newComment = ideasText.value;
     
+=======
+        e.preventDefault();
+        let newComment = ideasText.value;
+
+>>>>>>> Stashed changes
         try {
             const response = await fetch('http://localhost:3000/messages/create', {
                 method: 'POST',
@@ -114,13 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({ inspiration: newComment })
             });
-    
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-    
+
             const data = await response.json();
             console.log('Success:', data);
+<<<<<<< Updated upstream
     
             alert("New message added")
             ideasText.value = '';
@@ -134,6 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
     submitIdeas.addEventListener("click", function (e) {
         addNewComment(e)
     })
+=======
+
+            alert("New message added");
+            ideasText.value = '';
+            return ideasText.value;
+        } catch (error) {
+            console.error('Error posting the comment:', error);
+        }
+        alert("New message added");
+    }
+
+    submitIdeas.addEventListener("click", function (e) {
+        addNewComment(e);
+    });
+
+>>>>>>> Stashed changes
     setInterval(createBubble, 500);
 
     bubbleSizeInput.addEventListener('input', (event) => {
@@ -155,13 +185,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const minInterval = 100;
     let bubbleInterval = setInterval(createBubble, maxInterval - bubbleFrequency * (maxInterval - minInterval) / 100);
 
-
     const audioPlayer = document.getElementById('audioPlayer');
     const playPauseBtn = document.getElementById('playPauseBtn');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const volumeControl = document.getElementById('volumeControl');
-
 
     const tracks = [
         'music/track1.mp3',
@@ -219,4 +247,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadTrack(currentTrackIndex);
 
+
+    colorGrid.addEventListener('click', (event) => {
+        if (event.target.classList.contains('color-option')) {
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            selectedColor = event.target.getAttribute('data-color');
+            randomColorCheckbox.checked = false;
+        }
+    });
+
+    randomColorCheckbox.addEventListener('change', (event) => {
+        if (event.target.checked) {
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            selectedColor = null;
+        }
+    });
 });
