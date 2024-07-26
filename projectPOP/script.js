@@ -4,15 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageBox = document.getElementById('message-box');
     const bubbleSizeInput = document.getElementById('bubbleSize');
     const bubbleFrequencyInput = document.getElementById('bubbleFrequency');
-<<<<<<< Updated upstream
-    const ideasText = document.getElementById("ideasText")
-    const submitIdeas = document.getElementById("submitIdeas");
-=======
     const ideasText = document.getElementById("ideasText");
     const submitIdeas = document.getElementById("submitIdeas");
     const colorGrid = document.getElementById('colorGrid');
     const randomColorCheckbox = document.getElementById('randomColor');
->>>>>>> Stashed changes
     const maxBubbles = 30;
     const bubbleLifetime = 100000;
     const headerHeight = 60;
@@ -110,15 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function addNewComment(e) {
-<<<<<<< Updated upstream
-        e.preventDefault()
-        let newComment = ideasText.value;
-    
-=======
         e.preventDefault();
         let newComment = ideasText.value;
 
->>>>>>> Stashed changes
         try {
             const response = await fetch('http://localhost:3000/messages/create', {
                 method: 'POST',
@@ -134,21 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await response.json();
             console.log('Success:', data);
-<<<<<<< Updated upstream
-    
-            alert("New message added")
-            ideasText.value = '';
-            return ideasText.value
-        } catch (error) {
-            console.error('Error posting the comment:', error);
-        }
-        alert("New message added")
-    }
-
-    submitIdeas.addEventListener("click", function (e) {
-        addNewComment(e)
-    })
-=======
 
             alert("New message added");
             ideasText.value = '';
@@ -163,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addNewComment(e);
     });
 
->>>>>>> Stashed changes
     setInterval(createBubble, 500);
 
     bubbleSizeInput.addEventListener('input', (event) => {
