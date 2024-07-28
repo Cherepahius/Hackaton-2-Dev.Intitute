@@ -13,8 +13,6 @@ body {
     margin-right: auto;
     position: relative;
     box-shadow: 0 4px 8px black;
-
-
 }
 
 .login_section,
@@ -51,8 +49,7 @@ body {
     margin-top: 60px;
 }
 
-.login_section input[type="email"],
-.login_section input[type="password"] {
+.input-field {
     width: 90%;
     padding: 10px;
     margin: 5px 0 20px 0;
@@ -68,7 +65,6 @@ body {
     box-sizing: border-box;
     display: block;
     padding-bottom: 40px;
-
 }
 
 .option label {
