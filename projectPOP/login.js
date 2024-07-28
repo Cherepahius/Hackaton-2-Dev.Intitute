@@ -30,7 +30,7 @@ async function loginUser(e) {
         document.getElementById("username").value = '';
         document.getElementById("password").value = '';
     } catch (error) {
-        console.log(err)
+        console.log(error)
         console.error('Error registering', error);
     }
 }
