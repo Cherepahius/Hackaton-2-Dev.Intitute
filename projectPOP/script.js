@@ -16,29 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let bubbleFrequency = parseInt(bubbleFrequencyInput.value, 10);
     let selectedColor = null;
 
-    const phrases = [
-        "You can do it!",
-        "Popping like a pop star!",
-        "You popped more than a human pops in a lifetime!",
-        "Keep going, you're doing great!",
-        "Pop till you drop!",
-        "Bubble popping master!",
-        "Amazing popping skills!",
-        "You're on fire!",
-        "Unstoppable popper!",
-        "Bubble wrap champion!",
-        "Pop goes the bubble! It's like confetti, but less messy.",
-        "Why did the bubble go to therapy? It had too many unresolved pop-issues.",
-        "Bubbles: the only thing more satisfying to pop than bubble wrap.",
-        "Warning: Excessive popping may cause uncontrollable giggles.",
-        "Who needs a stress ball when you have bubbles to pop?",
-        "Pop 'til you drop—bubble edition!",
-        "I'm not procrastinating; I'm practicing my bubble popping skills.",
-        "Bubbles: proof that it's okay to burst into laughter.",
-        "Bubble popping: the only time it's okay to burst someone's bubble.",
-        "Pop quiz: What's the most fun you can have with a touch screen? Bubbles!"
-    ];
-
     function createBubble() {
         if (bubbleWrap.children.length >= maxBubbles) return;
         const bubble = document.createElement('div');
